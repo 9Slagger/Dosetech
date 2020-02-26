@@ -1,0 +1,16 @@
+
+//1.1
+result = 0
+for ( i from 1 to 10 ){
+  if ( i % 2 == 0 ) {
+    result = result + i
+    // short => result += i
+  }
+  else {
+    result = result + i * 2
+    // short => result += i * 2
+  }
+}
+
+//1.2
+result คือ 80

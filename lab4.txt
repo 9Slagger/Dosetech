@@ -1,0 +1,2 @@
+//2. function checkNumber ทำการเช็คว่า number parameter เป็นเลขคู่ return true เป็นเลขคี่ return false
+//และต้องมากกว่าหรือเท่ากับ 2 ไม่เช่นนั้นจะ return false

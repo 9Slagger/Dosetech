@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    const myQuestions = [
+      {
+        question: "1 + 2 is?",
+        answers: ["1", "2", "3"],
+        correctAnswer: 2
+      },
+      {
+        question: "What is the best site for Web Programmer ?",
+        answers:
+          [
+            "Stack Overflow",
+            "Quora",
+            "w3school"
+          ],
+        correctAnswer: 0
+      },
+      {
+        question: "Who is Prime minister for Thailand ?",
+        answers: [
+          "Prayut Chan-o-cha",
+          "Yingluck Shinawatra",
+          "Abhisit Vejjajiva",
+          "Somchai Wongsawat"
+        ],
+        correctAnswer: 0
+      }
+    ];
+    let myAnswers = []
+    myQuestions.forEach(() => {
+      myAnswers.push(null)
+    })
+    const checkAnswer = () => {
+      myQuestions.forEach((myQuestion, index) => {
+        if (myQuestion.answers[myQuestion.correctAnswer] !== myAnswers[index]) {
+          $(`#question-${index}`).show()
+        }
+        else {
+          $(`#question-${index}`).hide()
+        }
+      })
+    }
+    $(document).ready(() => {
+      let questionDom = []
+      questionDom.push("<div>")
+      myQuestions.forEach((myQuestion, myQuestionIndex) => {
+        questionDom.push(`<div>${myQuestionIndex + 1}. ${myQuestion.question}`)
+        let answerDom = []
+        myQuestion.answers.forEach(answer => {
+          answerDom.push(`<input type="radio" id="${myQuestionIndex}" name="answer-${myQuestionIndex}" value="${answer}"><label>${answer}</label><br>`)
+        })
+        answerDom = answerDom.join("")
+        questionDom.push(`<div id="question-${myQuestionIndex}" class="check-answer" hidden>incorrect answer</div>`)
+        questionDom.push(`<div>${answerDom}</div>`)
+        questionDom.push("</div>")
+      })
+      questionDom.push("</div>")
+      questionDom = questionDom.join("")
+      $("#question-section").html(questionDom)
+
+      for (let i = 0; i < myQuestions.length; i++) {
+        $(`input[type=radio][name=answer-${i}]`).change(function () {
+          myAnswers[this.id] = this.value
+          if (myAnswers.indexOf(null) === -1) {
+            checkAnswer()
+          }
+        })
+      }
+    })
+  </script>
+  <style type="text/css">
+  div.check-answer {
+    color: red;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="question-section">
+    <h1>Loading...</h1>
+  </div>
+</body>
+
+</html>
